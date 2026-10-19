@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+int main() {
+srand(time(0));
+    int guess =0;
+    int tries =0;
+    int min =1;
+    int max=100;
+    int ans= (rand() % (max-min +1)) + min;
+
+    printf("====Welcome to the number guessing game uwu====\n");
+printf("Guess a number between %d -> %d\n",min,max);
+    do{
+        printf("Enter a number: ");
+        scanf("%d",&guess);
+if (guess > ans){printf("TOO HIGH\n");}
+        else if(guess<ans){printf("TOO LOW\n");}
+        else {printf("CORRECT VRO!!\n");}
+        tries++;
+    }while (guess != ans);
+
+    printf("the Correct ans was indeed %d, it took you %d tries",ans,tries);    
+    return 0;
