@@ -1,0 +1,57 @@
+#include <stdio.h>  
+#include <stdlib.h>
+#include <time.h>
+// this is from the bro code yt channel im still learning this stuff. I learnt git but i forgot it so im manually pasting them. this is like a momento for the future, dont mind me.
+
+int getcompchoi();
+int getuserchoi();
+void checkwinner(int userchoi, int compchoi); 
+
+int main(){
+    srand(time(0)); //srand stands for seed random, 
+    printf("==== Rock Paper Scissors game====\n");
+    int userchoi = getuserchoi();
+    int compchoi = getcompchoi();
+    
+    switch(userchoi){
+        case 1: printf("You chose rock!\n"); break;
+        case 2: printf("You chose paper!\n"); break;
+        case 3: printf("You chose scissor!\n"); break;
+    }
+    
+    switch(compchoi){
+        case 1: printf("comp chose rock!\n"); break;
+        case 2: printf("comp chose paper!\n"); break;
+        case 3: printf("comp chose scissor!\n"); break;
+    }
+    
+    checkwinner(userchoi, compchoi);    
+    return 0;
+}
+    
+int getcompchoi(){
+    return (rand() % 3) + 1; 
+}
+
+int getuserchoi(){
+    int choice = 0;
+    do {
+        printf("choose option: \n 1:rock\n2:paper\n3:scissor\n");
+        scanf("%d", &choice);
+    } while (choice < 1 || choice > 3);
+    return choice;
+}
+                  
+void checkwinner(int userchoi, int compchoi){
+    if (userchoi == compchoi) {
+        printf("It's a tie!\n");
+    } 
+    else if ((userchoi == 1 && compchoi == 3) || 
+             (userchoi == 2 && compchoi == 1) || 
+             (userchoi == 3 && compchoi == 2)) {
+        printf("you win!!!\n");
+    } 
+    else {
+        printf("You lose!!!\n");
+    }
+}
