@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+void checkbal(float bal);
+float depo();
+float withdraw(float bal);
+
+int main(){
+    float bal = 0.0f;
+    int choice =0;
+
+    do{
+        printf("====Banking application====\n");
+
+        printf("1:check bal\n2:dep money\n3:withdraw money\n4:exit\nEnter your choice: ");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1:
+            checkbal(bal);
+break;
+            case 2:
+            bal += depo();
+               printf("bal is now: $%.2f\n",bal) ;
+break;
+            case 3:
+            bal -= withdraw(bal);
+printf("bal is now: $%.2f\n",bal);
+break;
+            case 4:
+            printf("Bye!!");
+break;
+            default:
+            printf("invalid choose again!\n");
+break;
+        }
+        
+    }while (choice != 4);
+
+    return 0;
+}
+
+
+void checkbal(float bal){
+        printf("Your balance is: $%.2f\n",bal);
+}
+
+float depo(){
+float amt = 0.0f;
+    printf("How much do you want to deposit: ");
+            scanf("%f",&amt);
+    if(amt<0){
+printf("invalid\n"); return 0.0f;}
+else {printf("success\n"); return amt;}}
+
+float withdraw(float bal){
+ float with =0.0f;
+    printf("\nHow much do you want to withdraw: ");
+    scanf("%f",&with);
+    if(withdraw < 0){printf("invalid\n");} else {printf("Success!\n");}
+return with;
+}
