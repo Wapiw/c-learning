@@ -1,0 +1,75 @@
+#include <cs50.h> //took me total of 2.5 hours 
+#include <stdio.h>
+int main()
+{
+    long p = get_long("Number: ");
+    long p1 = p;
+    long p2 = p; // i made 3 different p's cause the value changes with the for loop(i actually
+                 // forgot that and found this to be the easiest way)
+    long sum1 = 0, sum2 = 0, tot;
+    if (p >= 1000000000000LL &&
+        p <= 9999999999999999LL) // to check if it falls in the number range, big ik but i didnt
+                                 // think of anything else
+    {
+        p1 = p1 / 10;
+        for (int i = 0; i <= p - 1; i++) // this is for the everyother number doubling thingy + sum
+        {
+            if (p1 == 0)
+                break;
+            if ((p1 % 10) * 2 > 9)
+            {
+                sum1 += (((p1 % 10) * 2) - 9);
+            }
+            else
+            {
+                sum1 += ((p1 % 10) * 2);
+            }
+            p1 /= 100;
+        }
+        for (int j = 0; j <= p; j++) // this is for the numbers i left out sum
+        {
+            if (p2 == 0)
+                break;
+            sum2 += (p2 % 10);
+            p2 /= 100;
+        }
+        tot = sum1 + sum2;
+        if (tot % 10 != 0)
+        {
+            printf("INVALID\n");
+            return 0;
+        }
+    } // it took me so long to find this curly bracket cause i deleted it bymistake
+    else
+    {
+        printf("INVALID\n");
+        return 0;
+    }
+
+    long temp = p;
+    int len = 0;
+    for (long m = p; m > 0; m /= 10)
+    {
+        len++;
+    }
+    while (temp >= 100) // this is for getting the first 2 digits of the card number
+    {
+        temp /= 10;
+    }
+    int first2dig = temp;
+    if (len == 15 && (temp == 34 || temp == 37))
+    {
+        printf("AMEX\n");
+    }
+    else if (len == 16 && (temp >= 51 && temp <= 55))
+    {
+        printf("MASTERCARD\n");
+    }
+    else if ((len == 13 || len == 16) && (temp / 10 == 4))
+    {
+        printf("VISA\n");
+    }
+    else
+        printf("INVALID\n");
+    return 0;
+}
