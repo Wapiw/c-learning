@@ -1,0 +1,58 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    int sum2 = 0, sum1 = 0; // sum1 and sum2 = 0 cause of garbage value removal
+    char letter[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    int value[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
+    char word1[50];
+    char word2[50];
+    // input of player 1
+    printf("Player 1: ");
+    fgets(word1, sizeof(word1), stdin);
+    word1[strcspn(word1, "\n")] = '\0';
+
+    // input of player 2
+    printf("\nPlayer 2: ");
+    fgets(word2, sizeof(word2), stdin);
+    word2[strcspn(word2, "\n")] = '\0';
+
+    for (int i = 0; i < strlen(word1); i++) // first input score checker
+    {
+
+        for (int j = 0; j < 26; j++)
+        {
+            if (toupper(word1[i]) == letter[j])
+            {
+                sum1 += value[j]; // sum adder for first cond
+            }
+        }
+    }
+
+    for (int i = 0; i < strlen(word2); i++) // second input score checker
+    {
+
+        for (int j = 0; j < 26; j++)
+        {
+            if (toupper(word2[i]) == letter[j])
+            {
+                sum2 += value[j]; // sum adder for second cond
+            }
+        }
+    }
+    if (sum1 > sum2) // final score calculator
+    {
+        printf("Player 1 wins!\n");
+    }
+    else if (sum1 < sum2) // pretty self explanatory
+    {
+        printf("Player 2 wins!\n");
+    }
+    else
+    {
+        printf("Tie!\n");
+    }
+}
