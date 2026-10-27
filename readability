@@ -1,0 +1,52 @@
+#include <ctype.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    int words = 0, letters = 0, sent = 0;
+    char word1[1000];
+
+    printf("Text: "); // this is for input
+    fgets(word1, sizeof(word1), stdin);
+    word1[strcspn(word1, "\n")] = '\0';
+
+    for (int i = 0; i < strlen(word1);
+         i++) // this keeps looping for all the characters in the paragraph
+    {
+        // for the number of words
+
+        if (isalpha(word1[i])) // isalpha to check is alphabet or not
+        {
+            letters++; // ill add the +1 later
+        }
+        else if (isblank(word1[i])) // to check for spaces
+        {
+            words++;
+        }
+        else if (word1[i] == '!' || word1[i] == '?' ||
+                 word1[i] == '.') // we are assuming the sentence to end at these points
+        {
+            sent++;
+        }
+    }
+    words += 1; // cause spaces are in b/w words you need to add +1
+
+    float index = 0.0588 * (((float) letters / words) * 100.0) -
+                  0.296 * (((float) sent / words) * 100.0) -
+                  15.8; // float cause sent,letters,words are all in int
+
+    if (round(index) < 1) // this is pretty easy
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (round(index) >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
+    {
+        printf("Grade %.f\n", round(index)); // round is the normal rounding off from decimal to int
+    }
+}
